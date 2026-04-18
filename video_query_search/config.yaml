@@ -1,0 +1,47 @@
+data:
+  val_data_dir: '/path/to/vq2d/records/val/'
+
+parameters:
+  split: 'val'
+  similarity_threshold: 0.18
+  save_dir: 'logs/'
+  exp_name: 'merging-threshold-0.1'
+
+tren:
+  pretrained:
+    feature_extractor: 'dinov3_vitl16'
+    text_encoder: 'dinov3_vitl16'
+
+  architecture:
+    patch_size: 16
+    grid_size: 128
+    hidden_dim: 1024
+    text_embed_dim: 1024
+    num_decoder_layers: 2
+    num_attention_heads: 8
+
+  parameters:
+    image_resolution: 512
+    batch_size: 16
+    num_multiscale_regions: 3
+    tren_region_encoder_lr: 0.001
+    tren_image_encoder_lr: 0.0
+    tren_text_encoder_lr: 0.0
+    num_epochs: 5
+    region_region_max_prompts: 64
+    region_text_max_prompts: 16
+    crop_ratio: 0.7
+    accumulation_steps: 1
+    warmup_steps: 1500
+    logging_steps: 500
+    max_grad_norm: 5.0
+    downsample_masks: True
+    mask_resolution: 32
+    merging_iou_threshold: 0.8
+    merging_similarity_threshold: 0.975
+    temporal_merging_threshold: 0.1
+    num_workers: 16
+
+  logging:
+    save_dir: '../logs/'
+    exp_name: 'tren-ckpts'

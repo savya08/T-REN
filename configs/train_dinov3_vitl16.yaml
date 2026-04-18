@@ -1,0 +1,96 @@
+pretrained:
+  feature_extractor: 'dinov3_vitl16'
+  text_encoder: 'dinov3_vitl16'
+
+architecture:
+  patch_size: 16
+  grid_size: 128
+  hidden_dim: 1024
+  text_embed_dim: 1024
+  num_decoder_layers: 2
+  num_attention_heads: 8
+
+parameters:
+  image_resolution: 512
+  batch_size: 16
+  num_multiscale_regions: 3
+  tren_region_encoder_lr: 0.001
+  tren_image_encoder_lr: 0.0
+  tren_text_encoder_lr: 0.0
+  num_epochs: 5
+  region_region_max_prompts: 64
+  region_text_max_prompts: 16
+  crop_ratio: 0.7
+  accumulation_steps: 1
+  warmup_steps: 1500
+  logging_steps: 250
+  max_grad_norm: 5.0
+  downsample_masks: True
+  mask_resolution: 32
+  merging_iou_threshold: 0.8
+  merging_similarity_threshold: 0.975
+  num_workers: 16
+
+logging:
+  save_dir: 'logs/'
+  exp_name: 'tren-ckpts'
+
+data:
+  train_datasets:
+    - 'sa1b_train'
+    - 'cocostuff_train'
+    - 'openimages_train'
+    - 'phrasecut_train'
+    - 'mapillary_train'
+  val_datasets:
+    - 'sa1b_val'
+    - 'cocostuff_val'
+    - 'openimages_val'
+    - 'phrasecut_val'
+    - 'mapillary_val'
+  weights:
+    - 6.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+  sa1b_train_images_dir: '/path/to/sa1b/train_images/'
+  sa1b_val_images_dir: '/path/to/sa1b/val_images/'
+  sa1b_train_annotations_dir: '/path/to/sa1b/train_annotations/'
+  sa1b_val_annotations_dir: '/path/to/sa1b/val_annotations/'
+  sa1b_regions_binary_cache_dir: '/path/to/sa1b/region_binaries/'
+  cocostuff_train_images_dir: '/path/to/coco2017/train2017/'
+  cocostuff_val_images_dir: '/path/to/coco2017/val2017/'
+  cocostuff_train_annotations_path: '/path/to/coco2017/annotations/train2017/'
+  cocostuff_val_annotations_path: '/path/to/coco2017/annotations/val2017/'
+  cocostuff_labels_path: '/path/to/coco2017/annotations/labels.txt'
+  cocostuff_train_regions_binary_cache_dir: '/path/to/cocostuff/train_masks/'
+  cocostuff_val_regions_binary_cache_dir: '/path/to/cocostuff/val_masks/'
+  openimages_train_images_dir: '/path/to/openimagesv7/train_images/'
+  openimages_val_images_dir: '/path/to/openimagesv7/val_images/'
+  openimages_train_annotations_path: '/path/to/openimagesv7/train_annotations.csv'
+  openimages_val_annotations_path: '/path/to/openimagesv7/val_annotations.csv'
+  openimages_train_masks_dir: '/path/to/openimagesv7/train_masks/'
+  openimages_val_masks_dir: '/path/to/openimagesv7/val_masks/'
+  openimages_class_labels_path: '/path/to/openimagesv7/class_labels.csv'
+  phrasecut_train_images_dir: '/path/to/phrasecut/images/'
+  phrasecut_val_images_dir: '/path/to/phrasecut/images/'
+  phrasecut_train_annotations_path: '/path/to/phrasecut/refer_train.json'
+  phrasecut_val_annotations_path: '/path/to/phrasecut/refer_val.json'
+  phrasecut_split_info_path: '/path/to/phrasecut/image_data_split.json'
+  mapillary_train_images_dir: '/path/to/mapillary/training/images/'
+  mapillary_val_images_dir: '/path/to/mapillary/validation/images/'
+  mapillary_train_annotations_dir: '/path/to/mapillary/training/v2.0/'
+  mapillary_val_annotations_dir: '/path/to/mapillary/validation/v2.0/'
+  mapillary_object_categories_path: '/path/to/mapillary/config_v2.0.json'
+  muse_train_images_dir: '/path/to/muse/train/'
+  muse_val_images_dir: '/path/to/muse/val/'
+  muse_train_regions_binary_cache_dir: '/path/to/muse/train_masks/'
+  muse_val_regions_binary_cache_dir: '/path/to/muse/val_masks/'
+  muse_train_annotations_path: '/path/to/muse/annotations/train.json'
+  muse_val_annotations_path: '/path/to/muse/annotations/val.json'
+  ade20k_train_images_dir: '/path/to/ade20k/images/training/'
+  ade20k_val_images_dir: '/path/to/ade20k/images/validation/'
+  ade20k_train_annotations_dir: '/path/to/ade20k/annotations/training/'
+  ade20k_val_annotations_dir: '/path/to/ade20k/annotations/validation/'
+  ade20k_object_categories_path: '/path/to/ade20k/objectInfo150.txt'
